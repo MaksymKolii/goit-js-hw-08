@@ -1,10 +1,10 @@
 
 import SimpleLightbox from "simplelightbox";
-console.log(SimpleLightbox);
-// Дополнительный импорт стилей
+// console.log(SimpleLightbox);
+
 import "simplelightbox/dist/simple-lightbox.min.css";
 import { galleryItems } from './gallery-items';
-// Change code below this line
+
 
 //console.log(galleryItems[0].original);
 
