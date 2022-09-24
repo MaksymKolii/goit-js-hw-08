@@ -1,60 +1,87 @@
-localStorage.removeItem("videoplayer-current-time");
+import throttle from 'lodash.throttle';
+// localStorage.removeItem('videoplayer-current-time');
 
-const LOCALSTORAGE_KEY="feedback-form-state"
+const LOCALSTORAGE_KEY = 'feedback-form-state';
 
-// const refs={
+const refs = {
+  inputData: document.querySelector('.feedback-form'),
+  form: document.querySelector('.feedback-form'),
+};
 
-//     inputMail: document.querySelector('input[name="email"]'),
-//     inputMessage: document.querySelector('textarea[name="message"]'),
-//     form: document.querySelector('.feedback-form'),
-//     LOCALSTORAGE_KEY:"feedback-form-state",
+refs.inputData.addEventListener('input', throttle(onInputChange, 500));
+refs.form.addEventListener('submit', onFormSubmit);
+
+populatedInputData();
+
+function onInputChange(e) {
+  const {
+    elements: { email, message },
+  } = e.currentTarget;
+  console.log(email.value, message.value);
+
+//   const userData = { email: email.value, message: message.value };
+  const userData = { email: email.value, message: message.value };
+
+  localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(userData));
+  console.log(userData);
+  console.log(localStorage);
+}
+
+function onFormSubmit(e) {
+  e.preventDefault();
+  //console.log('Sending form');
+  e.currentTarget.reset();
+  localStorage.removeItem(LOCALSTORAGE_KEY);
+}
+
+function populatedInputData() {
+  const savedInputData = JSON.parse(localStorage.getItem(LOCALSTORAGE_KEY));
+  if (savedInputData) {
+    refs.inputData.email.value = savedInputData.email;
+    refs.inputData.message.value = savedInputData.message;
+  }
+}
+
+//2=====================================================================================
+
+// import throttle from 'lodash.throttle';
+// localStorage.removeItem('videoplayer-current-time');
+
+// const LOCALSTORAGE_KEY = 'feedback-form-state';
+
+// const inputData = document.querySelector('.feedback-form');
+// const form = document.querySelector('.feedback-form');
+
+// inputData.addEventListener('input', throttle(onTextInput, 500));
+// form.addEventListener('submit', onFormSubmit);
+
+
+// populatedInputData();
+// const userData ={};
+
+// function onTextInput(e) {
+
+//   userData[e.target.name] = e.target.value;
+
+//   localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(userData));
+//   console.log(userData);
+//   console.log(localStorage);
 // }
-// refs.inputMail.addEventListener('input', onInputChange);
-// refs.inputMessage.addEventListener('input', onInputChange);
-// refs.form.addEventListener('submit', onFormSubmit)
 
+// function onFormSubmit(e) {
+//   e.preventDefault();
+//   e.currentTarget.reset();
+//   localStorage.removeItem(LOCALSTORAGE_KEY);
+// }
 
-function onFormSubmit(e){
-    e.preventDefault();
-    const {
-      elements: { email, message },
-    } = e.currentTarget;
-    // if (!email.value || !message.value) {
-    //     return window.alert('Please input data!');
-    //   }
-      const userData = { email: email.value, message: message.value };
+// function populatedInputData() {
+//   const savedInputData = JSON.parse(localStorage.getItem(LOCALSTORAGE_KEY));
 
-      localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(userData));
-    console.log(userData);
-
-      e.currentTarget.reset();
-      localStorage.removeItem("feedback-form-state");
-}
-
-
-
-
-const formInput =document.querySelector('.feedback-form')
-const formSubmit =document.querySelector('.feedback-form')
-
-formInput.addEventListener('input', onInputfillLocalStorage)
-formSubmit.addEventListener('submit', onFormSubmit)
-
-
-function onInputfillLocalStorage(e){
-
-    e.preventDefault();
+//   if (savedInputData) {
+//     inputData.email.value = savedInputData.email;
+//     // console.log('savedInputData.email', savedInputData.email);
+//     inputData.message.value = savedInputData.message;
+//     // console.log('savedInputData.message', savedInputData.message);
     
-    const {
-      elements: { email, message },
-    } = e.currentTarget;
-  
-    console.log(email.value, message.value);
-
-      const userData = { email: email.value, message: message.value };
-
-      localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(userData));
-    console.log(userData);
-
-      //e.currentTarget.reset();
-}
+//   }
+// }
