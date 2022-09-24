@@ -1,7 +1,5 @@
 import Player from '@vimeo/player';
 import throttle from 'lodash.throttle';
-//Не знаю как надо Но добавил, чтоб не затягивалась localStorage из 3 го задания
-//localStorage.removeItem('feedback-form-state');
 
 const VIDEOCURRENT_TIME = 'videoplayer-current-time';
 const iframe = document.querySelector('iframe');

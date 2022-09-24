@@ -1,6 +1,4 @@
 import throttle from 'lodash.throttle';
-// localStorage.removeItem('videoplayer-current-time');
-
 const LOCALSTORAGE_KEY = 'feedback-form-state';
 
 const refs = {
