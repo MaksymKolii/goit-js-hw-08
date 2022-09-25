@@ -17,5 +17,5 @@ function updatedTime({ seconds, duration }) {
 }
 
 if (getSavedTime) {
-  player.setCurrentTime(getSavedTime);
+  player.setCurrentTime(getSavedTime || 0);
 }
