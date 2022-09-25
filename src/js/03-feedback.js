@@ -12,8 +12,7 @@ refs.form.addEventListener('submit', onFormSubmit);
 let userData = JSON.parse(localStorage.getItem(LOCALSTORAGE_KEY)) || {};
 
 //* первый метод для которого нужны слушатели на textarea и input
-//populatedInputData(userData);
-
+// populatedInputData(userData);
 
 //* Второй метод для которого нужен только слкшатель на formе
 populatedInputDataNew(userData);
@@ -31,16 +30,8 @@ function onFormSubmit(e) {
 
 function populatedInputData(data) {
   if (data) {
-    if (data['email'] !== undefined) {
-      refs.input.value = data['email'];
-    } else {
-      refs.input.value = '';
-    }
-    if (data['message'] !== undefined) {
-      refs.textarea.value = data['message'];
-    } else {
-      refs.textarea.value = '';
-    }
+    refs.input.value = data['email'] || '';
+    refs.textarea.value = data['message'] || '';
   }
 }
 
@@ -50,7 +41,6 @@ function populatedInputData(data) {
 элемент формы [name].value значение(value) из Форыча
 */
 function populatedInputDataNew(data) {
-
   if (data) {
     Object.entries(data).forEach(([name, value]) => {
       refs.form.elements[name].value = value;

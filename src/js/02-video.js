@@ -8,11 +8,14 @@ const getSavedTime = +localStorage.getItem(VIDEOCURRENT_TIME);
 
 player.on('timeupdate', throttle(updatedTime, 1000));
 
-function updatedTime({ seconds }) {
+function updatedTime({ seconds, duration }) {
   const currentTime = Math.round(seconds);
-  localStorage.setItem(VIDEOCURRENT_TIME,currentTime);
+  localStorage.setItem(VIDEOCURRENT_TIME, currentTime);
+  if (seconds === duration) {
+    localStorage.removeItem(VIDEOCURRENT_TIME);
+  }
 }
 
-if(getSavedTime){
+if (getSavedTime) {
   player.setCurrentTime(getSavedTime);
 }
