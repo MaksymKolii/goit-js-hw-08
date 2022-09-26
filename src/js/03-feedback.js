@@ -1,9 +1,9 @@
 import throttle from 'lodash.throttle';
 const LOCALSTORAGE_KEY = 'feedback-form-state';
 const refs = {
-  input: document.querySelector('.feedback-form input'),
+  //input: document.querySelector('.feedback-form input'),
   form: document.querySelector('.feedback-form'),
-  textarea: document.querySelector('.feedback-form textarea'),
+  //textarea: document.querySelector('.feedback-form textarea'),
 };
 
 refs.form.addEventListener('input', throttle(onTextInput, 500));
@@ -24,18 +24,24 @@ function onTextInput(e) {
 
 function onFormSubmit(e) {
   e.preventDefault();
+  if (
+    !e.currentTarget.elements.email.value ||
+    !e.currentTarget.elements.message.value
+  ) {
+    return alert('Please input data!');
+  }
   e.currentTarget.reset();
   localStorage.removeItem(LOCALSTORAGE_KEY);
   console.log(userData);
-  userData={};
+  userData = {};
 }
 
-function populatedInputData(data) {
-  if (data) {
-    refs.input.value = data['email'] || '';
-    refs.textarea.value = data['message'] || '';
-  }
-}
+// function populatedInputData(data) {
+//   if (data) {
+//     refs.input.value = data['email'] || '';
+//     refs.textarea.value = data['message'] || '';
+//   }
+// }
 
 /* 
 1) Из localStorage методом Object.entries(data)-- получаем массив масивов  со значением ключ, значение [name, value]
