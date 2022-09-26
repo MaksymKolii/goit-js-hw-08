@@ -26,6 +26,8 @@ function onFormSubmit(e) {
   e.preventDefault();
   e.currentTarget.reset();
   localStorage.removeItem(LOCALSTORAGE_KEY);
+  console.log(userData);
+  userData={};
 }
 
 function populatedInputData(data) {
